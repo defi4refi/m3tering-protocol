@@ -1,0 +1,39 @@
+// SPDX-License-Identifier: MIT
+// Compatible with OpenZeppelin Contracts ^5.0.0
+pragma solidity ^0.8.37;
+
+interface IRollup {
+    error InvalidBlobs();
+    error OversizeBlobs();
+
+    event NewState(
+        address indexed from,
+        bytes32 indexed anchorBlock,
+        uint256 indexed chainLength,
+        bytes accountBlob,
+        bytes nonceBlob,
+        bytes proof
+    );
+
+    function commitState(bytes calldata accountBlob, bytes calldata nonceBlob, bytes calldata proof) external;
+
+    function QUOTA() external view returns (uint256);
+
+    function SP1_GROTH16_GATEWAY() external view returns (address);
+
+    function SP1_PROGRAM_VKEY() external view returns (bytes32);
+
+    function anchorBlock() external view returns (bytes32);
+
+    function chainLength() external view returns (uint256);
+
+    function account(uint256 tokenId) external view returns (bytes6);
+
+    function nonce(uint256 tokenId) external view returns (bytes6);
+
+    function latestStateAddress(uint256 io) external view returns (address);
+
+    function state(uint256 stateIndex, uint256 io, uint256 tokenId) external view returns (bytes6);
+
+    function stateAddress(uint256 stateIndex, uint256 io) external view returns (address);
+}
