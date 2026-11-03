@@ -1,10 +1,13 @@
-# verify-build — M3tering Protocol per-repo verification workflow
-
+# verify-build.yml — defi4refi per-repo verification workflow
+#
 # Copied into each new project repo as `.github/workflows/verify-build.yml`
 # by the build agent (Hermes). Runs on every push/PR:
 #   1. forge build + forge test        (if contracts/ exists)
 #   2. license obligations report      (vendored components → docs/OSS-LICENSES.md)
 #   3. custom-code gate                (tools/custom-code.sh must exit 0)
+#
+# Requires: nothing custom — GitHub-hosted runner, foundry toolchain,
+# and this repo's tools/custom-code.sh vendored at tools/custom-code.sh.
 
 name: verify-build
 
